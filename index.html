@@ -35,7 +35,7 @@
       <input type="submit" value="Indsend gæt" class="guessSubmit">
     </div>
 
-    <div class="resultParas">
+    <div class="resultParagraphs">
       <p class="guesses"></p>
       <p class="lastResult"></p>
       <p class="lowOrHi"></p>
@@ -52,13 +52,13 @@
         const guessSubmit = document.querySelector('.guessSubmit');
         const guessField = document.querySelector('.guessField');
 
-        let guessCount = 1;
+        let amountOfGuess = 1;
         let resetButton;
 
 
-        function checkGuess() {
+        function guessChecking() {
         let userGuess = Number(guessField.value);
-        if (guessCount === 1){
+        if (amountOfGuess === 1){
                 guesses.textContent = 'Tidligere tal: ';
             }
         guesses.textContent += userGuess + ' ';
@@ -68,7 +68,7 @@
             lastResult.style.backgroundColor = 'green';
             lowOrHi.textContent = '';
             setGameOver();
-        } else if (guessCount === 10) {
+        } else if (amountOfGuess === 10) {
         lastResult.textContent = 'Spillet er slut. Du har tabt.';
         setGameOver();
             } else {
@@ -81,12 +81,12 @@
            }
         }
 
-        guessCount++;
+        amountOfGuess++;
         guessField.value = '';
         guessField.focus();
         }
 
-        guessSubmit.addEventListener('click', checkGuess);
+        guessSubmit.addEventListener('click', guessChecking);
 
         function setGameOver() {
           guessField.disabled = true;
@@ -94,13 +94,13 @@
           resetButton = document.createElement('button');
           resetButton.textContent = 'Start et nyt spil';
           document.body.append(resetButton);
-          resetButton.addEventListener('click', resetGame);
+          resetButton.addEventListener('click', gameReset);
         }
 
-        function resetGame() {
-          guessCount = 1;
+        function gameReset() {
+          amountOfGuess = 1;
         
-          const resetParas = document.querySelectorAll('.resultParas p');
+          const resetParas = document.querySelectorAll('.resultParagraphs p');
           for (let i = 0; i < resetParas.length; i++) {
            resetParas[i].textContent = '';
          }
